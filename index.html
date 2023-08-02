@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Website</title>
+  <style>
+    /* Your CSS styles here */
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Welcome to Sample Website</h1>
+  </header>
+
+  <main>
+    <h2>Main Content</h2>
+    <p>This is a simple sample website. You can add your content here.</p>
+    <button id="changeColorButton">Change Background Color</button>
+
+    <!-- Access Control Form -->
+    <form id="accessForm">
+      <label for="accessCode">Enter Access Code:</label>
+      <input type="password" id="accessCode" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Hidden Download Link -->
+    <p>Download our sample file:</p>
+    <a class="download-link" id="downloadLink" href="#" download>Download File</a>
+    <p id="accessMessage" style="display: none; color: green;">Access granted. You can download the file now.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Sample Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript function to change the background color
+    document.getElementById("changeColorButton").addEventListener("click", function() {
+      document.body.style.backgroundColor = getRandomColor();
+    });
+
+    function getRandomColor() {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Access Control Logic
+    document.getElementById("accessForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var accessCode = document.getElementById("accessCode").value.trim().toLowerCase();
+
+      var correctAccessCode = "fetopia2023";
+
+      if (accessCode === correctAccessCode) {
+        // Set the direct download link when the access code is correct
+        var downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = "https://drive.google.com/u/0/uc?id=17q_db0Dpq_eutykHGC0N3cdwCSz9ARIp&export=download";
+        downloadLink.style.display = "block"; // Show the download link
+
+        // Show the success message and change the border color of the input field to green
+        var accessMessage = document.getElementById("accessMessage");
+        accessMessage.style.display = "block";
+
+        var accessCodeInput = document.getElementById("accessCode");
+        accessCodeInput.style.borderColor = "green";
+      } else {
+        // Reset the form and show an alert for an incorrect access code
+        document.getElementById("accessForm").reset();
+        alert("Incorrect access code. Please try again.");
+      }
+    });
+  </script>
+</body>
+
+</html>
